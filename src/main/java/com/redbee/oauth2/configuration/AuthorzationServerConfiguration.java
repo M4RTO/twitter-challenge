@@ -3,6 +3,7 @@ package com.redbee.oauth2.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,33 +19,36 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 public class AuthorzationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
   @Autowired
-  @Qualifier("authenticationManagerBean")
   private AuthenticationManager authenticationManager;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  @Override
+  public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+
+    security.tokenKeyAccess("permitAll()")
+            .checkTokenAccess("isAuthenticated()");
+  }
+
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
     clients
-      .inMemory()
-      .withClient("client_api")
-      .secret(passwordEncoder.encode("secret"))
-      .authorizedGrantTypes("authorization_code")
-      .redirectUris("http://localhost:8080")
-      .resourceIds("client_api")
-      .scopes("read");
+            .inMemory()
+            .withClient("ClientId")
+            .secret("secret")
+            .authorizedGrantTypes("authorization_code")
+            .redirectUris("http://localhost:8080")
+            .resourceIds("ClientId")
+            .scopes("user_info")
+            .autoApprove(true);
   }
 
-  @Override
-  public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-    //nothing
-    oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("permitAll()");
-  }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.tokenStore(new InMemoryTokenStore()).authenticationManager(authenticationManager);
+
+    endpoints.authenticationManager(authenticationManager);
   }
+
+
 
 }

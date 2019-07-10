@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: twitter-oauth
+  cloud:
+    config:
+      uri: http://kpack-cloud-config-server:8888
+      profile: prod
