@@ -4,6 +4,8 @@ import com.redbee.oauth2.entity.CustomUserDetails;
 import com.redbee.oauth2.entity.User;
 import com.redbee.oauth2.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,7 +28,16 @@ public class CustomUserDetailService implements UserDetailsService {
         user.orElseThrow(() -> new UsernameNotFoundException("User doesnt Exist"));
 
         // return Optional.of(user).map(CustomUserDetails::new).get();
-        return user.map(CustomUserDetails::new).get();
+        return toUserDetails(user.get());
+        //return user.map(CustomUserDetails::new).get();
 
     }
+
+    private UserDetails toUserDetails(User userObject) {
+        return org.springframework.security.core.userdetails.User.withUsername(userObject.getName())
+                .password(userObject.getPassword())
+                .roles(userObject.getRole())
+                .build();
+    }
+
 }

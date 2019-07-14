@@ -73,6 +73,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web-services')
 	compile('org.springframework.ws:spring-ws-security')
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
 	compile("org.springframework:spring-web")
 	compile("com.fasterxml.jackson.core:jackson-databind")
 	testCompile('org.springframework.boot:spring-boot-starter-test')

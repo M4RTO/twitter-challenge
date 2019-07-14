@@ -13,13 +13,13 @@ public class User {
     }
 
 
-    public User(String email, String name, String lastName, String password, Boolean active, Set<Role> roles) {
+    public User(String email, String name, String lastName, String password, Boolean active,String role) {
         this.email = email;
         this.name = name;
         this.lastName = lastName;
         this.password = password;
         this.active = active;
-        this.roles = roles;
+        this.role = role;
     }
 
     @Id
@@ -42,11 +42,8 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns =
-    @JoinColumn(name = "user_id"), inverseJoinColumns =
-    @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @Column(name = "role")
+    private String role;
 
     public Long getId() {
         return id;
@@ -96,11 +93,11 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

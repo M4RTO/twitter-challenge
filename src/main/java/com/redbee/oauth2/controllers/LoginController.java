@@ -41,21 +41,5 @@ public class LoginController {
     return new ModelAndView("index", model);
 
   }
-
-
-//  @RequestMapping(value = "/postLogin", method = RequestMethod.POST)
-//  public String postLogin(Model model, HttpSession session) {
-//    UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-//    validatePrinciple(authentication.getPrincipal());
-//    User loggedInUser = (User) authentication.getPrincipal();
-//    model.addAttribute("currentUser", loggedInUser.getName());
-//    session.setAttribute("userId", loggedInUser.getId());
-//    return "redirect:/wallPage";
-//  }
-//  private void validatePrinciple(Object principal) {
-//    if (!(principal instanceof User)) {
-//      throw new  IllegalArgumentException("Principal can not be null!");
-//    }
-//  }
 }
 
