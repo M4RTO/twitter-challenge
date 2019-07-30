@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 @Configuration
@@ -38,7 +37,7 @@ public class AuthorzationServerConfiguration extends AuthorizationServerConfigur
             .withClient("client_api")
             .secret(passwordEncoder.encode("secret"))
             .authorizedGrantTypes("authorization_code")
-            .redirectUris("https://www.getpostman.com/oauth2/callback")
+            .redirectUris("http://localhost:8080")
             .resourceIds("client_api")
             .scopes("read");
   }

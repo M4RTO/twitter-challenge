@@ -8,13 +8,13 @@ import java.util.Map;
 
 @RestController
 public class HelloWorld {
-
-  @GetMapping(value = "/api/hello")
-  public Map<String, String> hello() {
-    HashMap<String, String> result = new HashMap<>();
-    result.put("Hola", "Mundo");
-    return result;
-  }
+//
+//  @GetMapping(value = "/api/hello")
+//  public Map<String, String> hello() {
+//    HashMap<String, String> result = new HashMap<>();
+//    result.put("Hola", "Mundo");
+//    return result;
+//  }
 
   @GetMapping(value = "/anon")
   public Map<String, String> anon() {
